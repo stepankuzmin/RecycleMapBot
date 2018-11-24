@@ -20,11 +20,11 @@ app.post('/find', async (req, res) => {
 });
 
 app.post('/start', async (req, res) => {
-  const { message, location } = req.body;
+  const { message } = req.body;
   const chatId = message.chat.id;
 
-  if (location) {
-    const { latitude, longitude } = location;
+  if (message.location) {
+    const { latitude, longitude } = message.location;
     const point = await nearestPoint(longitude, latitude);
     await showPoint(chatId, point);
   } else {
