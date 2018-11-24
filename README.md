@@ -1,6 +1,6 @@
 # Telegram RecycleMap Bot
 
-[t.me/RecycleMapBot](t.me/RecycleMapBot)
+[t.me/RecycleMapBot](https://t.me/RecycleMapBot)
 
 ## Usage
 
