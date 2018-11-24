@@ -1,5 +1,7 @@
 # Telegram RecycleMap Bot
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/stepankuzmin/RecycleMapBot.svg)](https://greenkeeper.io/)
+
 [t.me/RecycleMapBot](t.me/RecycleMapBot)
 
 ## Usage
