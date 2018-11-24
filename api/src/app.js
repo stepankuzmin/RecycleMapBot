@@ -1,8 +1,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 
-const { fetchPoints, reply } = require('./utils');
 const { syncDatabase, nearestPoint } = require('./db');
+const { fetchPoints, welcome, showPoint } = require('./utils');
 
 const app = express();
 app.use(bodyParser.json());
@@ -21,9 +21,15 @@ app.post('/find', async (req, res) => {
 
 app.post('/start', async (req, res) => {
   const { message } = req.body;
+  const chatId = message.chat.id;
 
-  const text = 'Welcome to RecycleMap Bot!';
-  await reply(message, text);
+  if (message.location) {
+    const { latitude, longitude } = message.location;
+    const point = await nearestPoint(longitude, latitude);
+    await showPoint(chatId, point);
+  } else {
+    await welcome(chatId);
+  }
 
   res.send('ok');
 });

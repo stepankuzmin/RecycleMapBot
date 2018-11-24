@@ -32,17 +32,18 @@ const syncDatabase = (points) => {
     t.batch([t.none('delete from recycle_points'), t.none(insertPoints)]));
 };
 
-const nearestPoint = async (lng, lat) => {
-  const result = await db.one({
+const nearestPoint = async (lng, lat) =>
+  db.one({
     name: 'find-nearest-point',
-    text: `SELECT *, st_asgeojson(geom) as geom
+    text: `SELECT
+             title,
+             address,
+             st_x(geom) as longitude,
+             st_y(geom) as latitude
            FROM recycle_points
            ORDER BY geom <-> st_setsrid(st_point($1, $2), 4326)
            LIMIT 1`,
     values: [lng, lat]
   });
-
-  return result;
-};
 
 module.exports = { syncDatabase, nearestPoint };
